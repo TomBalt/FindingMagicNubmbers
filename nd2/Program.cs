@@ -6,9 +6,13 @@ namespace nd2
     {
         static void Main()
         {
+            string MagicNumbers = null;
+
             int[] Multiplyiers = { 2, 3, 4, 5, 6 };
+
             foreach (int multiplyier in Multiplyiers)
             {
+
                 Console.WriteLine($"========Looking for a 6 digit magic number which has same numbers than multyplied by {multiplyier} ====");
                 for (int number = 100000; number < 999999; number++)
                 {
@@ -24,11 +28,35 @@ namespace nd2
                     if (CompareTwoIntArrays(number1Array, number2Array))
                     {
                         Console.WriteLine($"Found a magic number {number} which is multiplied by {multiplyier} has same numbers {number2} ");
+                        MagicNumbers += Convert.ToString(number) + ",";
+
                     }
 
                 }
                 Console.WriteLine("");
             }
+            foreach (string nr in MagicNumbers.Split(","))
+            {
+                Console.WriteLine(nr);
+
+            }
+
+            string[] maggicArray = MagicNumbers.Split(",");
+            for (int i = 0; i < maggicArray.Length; i++)
+            {
+                int matches = 0;
+                foreach (string maggicNumber in maggicArray)
+                {
+                    if (maggicArray[i] == maggicNumber) {
+                        matches += 1;
+                    }
+                }
+                if (matches == 5) {
+                    Console.WriteLine("Magic Number FOUND: " + maggicArray[i]);
+                    break;
+                }
+            }
+
             Console.WriteLine("Done!");
         }
 
