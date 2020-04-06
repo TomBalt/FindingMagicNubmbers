@@ -6,58 +6,37 @@ namespace nd2
     {
         static void Main()
         {
-            string MagicNumbers = null;
-
-            int[] Multiplyiers = { 2, 3, 4, 5, 6 };
-
-            foreach (int multiplyier in Multiplyiers)
+            Console.WriteLine("Starting a search of Magic Number!");
+            for (int number = 100000; number < 999999; number++)
             {
-
-                Console.WriteLine($"========Looking for a 6 digit magic number which has same numbers than multyplied by {multiplyier} ====");
-                for (int number = 100000; number < 999999; number++)
+                int[] number1Array = NumberToArray(number);
+                if (!CheckIfArrayHasUniqueNumbers(number1Array))
                 {
-
-                    int[] number1Array = NumberToArray(number);
-                    if (!CheckIfArrayHasUniqueNumbers(number1Array))
-                    {
-                        continue;
-                    }
-
-                    int number2 = number * multiplyier;
-                    int[] number2Array = NumberToArray(number2);
-                    if (CompareTwoIntArrays(number1Array, number2Array))
-                    {
-                        Console.WriteLine($"Found a magic number {number} which is multiplied by {multiplyier} has same numbers {number2} ");
-                        MagicNumbers += Convert.ToString(number) + ",";
-
-                    }
-
+                    continue;
                 }
-                Console.WriteLine("");
-            }
-            foreach (string nr in MagicNumbers.Split(","))
-            {
-                Console.WriteLine(nr);
 
+                FindAMagicNymber(number);
+   
             }
-
-            string[] maggicArray = MagicNumbers.Split(",");
-            for (int i = 0; i < maggicArray.Length; i++)
-            {
-                int matches = 0;
-                foreach (string maggicNumber in maggicArray)
-                {
-                    if (maggicArray[i] == maggicNumber) {
-                        matches += 1;
-                    }
-                }
-                if (matches == 5) {
-                    Console.WriteLine("Magic Number FOUND: " + maggicArray[i]);
-                    break;
-                }
-            }
-
+            Console.ReadKey();
             Console.WriteLine("Done!");
+        }
+
+        static void FindAMagicNymber(int number)
+        {
+
+            int[] number1Array = NumberToArray(number);
+
+            int[] number2Array = NumberToArray(number * 2);
+            int[] number3Array = NumberToArray(number * 3);
+            int[] number4Array = NumberToArray(number * 4);
+            int[] number5Array = NumberToArray(number * 5);
+            int[] number6Array = NumberToArray(number * 6);
+            if (CompareTwoIntArrays(number1Array, number2Array) && CompareTwoIntArrays(number1Array, number3Array) && CompareTwoIntArrays(number1Array, number4Array) && CompareTwoIntArrays(number1Array, number5Array) && CompareTwoIntArrays(number1Array, number6Array))
+            {
+                Console.WriteLine("Magic number: " + number);
+
+            }
         }
 
         static bool CheckIfArrayHasUniqueNumbers(int[] numbers)
